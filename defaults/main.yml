@@ -1,0 +1,6 @@
+---
+# defaults file for docker
+
+advertise_addr: ""
+swarm_managers: []
+swarm_workers: [] 

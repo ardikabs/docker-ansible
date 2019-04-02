@@ -1,0 +1,12 @@
+---
+# tasks file for docker
+
+- include: install.yml
+
+- include: swarm_master.yml
+  run_once: yes
+  delegate_to: "{{ groups['managers'][0] }}"
+  when: (swarm_managers|length > 0)
+
+- include: swarm_member.yml
+  when: (swarm_workers|length > 0) and (inventory_hostname != swarm_managers[0])

@@ -1,0 +1,11 @@
+---
+
+- name: Join Manager
+  command: "docker swarm join --token {{ manager_token }} {{ manager_addr }}:2377"
+  ignore_errors: yes"
+  when: (inventory_hostname != swarm_managers[0]) and (inventory_hostname in swarm_managers)
+
+- name: Join Worker
+  command: "docker swarm join --token {{ worker_token }} {{ manager_addr }}:2377"
+  ignore_errors: yes
+  when: (inventory_hostname in swarm_workers)
